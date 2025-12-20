@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tyuiu.FisherMA.Sprint7.Project.V9.Lib\Tyuiu.FisherMA.Sprint7.Project.V9.Lib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 

@@ -8,4 +8,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Tyuiu.FisherMA.Sprint7.Project.V9.Lib\Tyuiu.FisherMA.Sprint7.Project.V9.Lib.csproj" />
+  </ItemGroup>
+
 </Project>
