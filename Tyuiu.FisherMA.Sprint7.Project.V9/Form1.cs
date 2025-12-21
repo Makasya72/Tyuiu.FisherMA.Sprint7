@@ -11,16 +11,15 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9
     {
         private readonly DataService dataService_FMA = new DataService();
         private DataTable videoTable_FMA;
+        private DataView videoView_FMA;
 
-        public Form1()
-        {
-            InitializeComponent();
-        }
+        public Form1() { InitializeComponent(); }
 
         private void buttonLoadCsv_FMA_Click(object sender, EventArgs e)
         {
             videoTable_FMA = dataService_FMA.LoadFromCsv("videoclips.csv");
-            dataGridViewVideoCatalog_FMA.DataSource = videoTable_FMA;
+            videoView_FMA = new DataView(videoTable_FMA);
+            dataGridViewVideoCatalog_FMA.DataSource = videoView_FMA;
             UpdateStatistics_FMA();
             panelChart_FMA.Invalidate();
         }
@@ -52,6 +51,7 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9
 
         private void UpdateStatistics_FMA()
         {
+            if (videoTable_FMA == null) return;
             labelCount_FMA.Text = $"Количество: {videoTable_FMA.Rows.Count}";
             labelSum_FMA.Text = $"Сумма: {dataService_FMA.SumCost(videoTable_FMA)}";
             labelAvg_FMA.Text = $"Среднее: {dataService_FMA.AverageCost(videoTable_FMA)}";
@@ -59,18 +59,15 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9
             labelMax_FMA.Text = $"Max: {dataService_FMA.MaxCost(videoTable_FMA)}";
         }
 
-        // 🔥 ГИСТОГРАММА БЕЗ CHART
         private void panelChart_FMA_Paint(object sender, PaintEventArgs e)
         {
-            if (videoTable_FMA == null || videoTable_FMA.Rows.Count == 0)
-                return;
+            if (videoTable_FMA == null || videoTable_FMA.Rows.Count == 0) return;
 
             Graphics g = e.Graphics;
             g.Clear(Color.White);
 
             double maxCost = videoTable_FMA.AsEnumerable().Max(r => r.Field<double>("Cost"));
-
-            int barWidth = panelChart_FMA.Width / videoTable_FMA.Rows.Count;
+            int barWidth = Math.Max(panelChart_FMA.Width / videoTable_FMA.Rows.Count, 10);
             int chartHeight = panelChart_FMA.Height - 20;
 
             for (int i = 0; i < videoTable_FMA.Rows.Count; i++)
@@ -88,6 +85,29 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9
                 g.FillRectangle(Brushes.SteelBlue, rect);
                 g.DrawRectangle(Pens.Black, rect);
             }
+        }
+
+        private void buttonApplyFilter_FMA_Click(object sender, EventArgs e)
+        {
+            if (videoView_FMA == null) return;
+
+            string filterText = textBoxSearch_FMA.Text.Trim().Replace("'", "''");
+            string filterTheme = comboBoxFilter_FMA.SelectedItem.ToString();
+
+            string filter = "";
+
+            if (!string.IsNullOrEmpty(filterText))
+            {
+                filter += $"Theme LIKE '%{filterText}%' OR Actor LIKE '%{filterText}%'";
+            }
+
+            if (filterTheme != "Все")
+            {
+                if (!string.IsNullOrEmpty(filter)) filter += " AND ";
+                filter += $"Theme = '{filterTheme}'";
+            }
+
+            videoView_FMA.RowFilter = filter;
         }
     }
 }

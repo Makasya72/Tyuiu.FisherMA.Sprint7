@@ -53,16 +53,9 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9.Lib
             return dt;
         }
 
-        public double SumCost(DataTable table) =>
-            table.AsEnumerable().Sum(r => r.Field<double>("Cost"));
-
-        public double AverageCost(DataTable table) =>
-            table.AsEnumerable().Average(r => r.Field<double>("Cost"));
-
-        public double MinCost(DataTable table) =>
-            table.AsEnumerable().Min(r => r.Field<double>("Cost"));
-
-        public double MaxCost(DataTable table) =>
-            table.AsEnumerable().Max(r => r.Field<double>("Cost"));
+        public double SumCost(DataTable table) => table.AsEnumerable().Sum(r => r.Field<double>("Cost"));
+        public double AverageCost(DataTable table) => table.AsEnumerable().Average(r => r.Field<double>("Cost"));
+        public double MinCost(DataTable table) => table.AsEnumerable().Min(r => r.Field<double>("Cost"));
+        public double MaxCost(DataTable table) => table.AsEnumerable().Max(r => r.Field<double>("Cost"));
     }
 }
