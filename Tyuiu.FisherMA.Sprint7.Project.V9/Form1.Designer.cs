@@ -73,6 +73,7 @@
                 Height = 90
             };
 
+
             labelCode_FMA = new System.Windows.Forms.Label { Text = "Код", Left = 10, Top = 10 };
             textBoxCode_FMA = new System.Windows.Forms.TextBox { Left = 10, Top = 30, Width = 70 };
 

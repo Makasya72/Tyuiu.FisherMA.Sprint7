@@ -11,7 +11,8 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9
     {
         private readonly DataService dataService_FMA = new DataService();
         private DataTable videoTable_FMA;
-        private DataView videoView_FMA;
+        private DataView videoView_FMA; 
+
 
         public Form1() { InitializeComponent(); }
 
