@@ -6,23 +6,28 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9
 {
     partial class Form1
     {
+        // Компоненты формы
         private System.ComponentModel.IContainer components = null;
 
-        private Panel panelTop_FMA;
-        private Panel panelInput_FMA;
-        private Panel panelTools_FMA;
-        private Panel panelStats_FMA;
-        private Panel panelChart_FMA;
-        private Panel panelHelp_FMA;
+        // Панели для разных областей интерфейса
+        private Panel panelTop_FMA;       // Панель с таблицей
+        private Panel panelInput_FMA;     // Панель для ввода данных
+        private Panel panelTools_FMA;     // Панель инструментов (кнопки загрузки, поиска, сортировки)
+        private Panel panelStats_FMA;     // Панель статистики
+        private Panel panelChart_FMA;     // Панель для диаграммы
+        private Panel panelHelp_FMA;      // Панель справки
 
+        // Таблица для отображения видеокаталога
         private DataGridView dataGridViewVideoCatalog_FMA;
 
+        // Кнопки управления
         private Button buttonLoadCsv_FMA;
         private Button buttonSaveCsv_FMA;
         private Button buttonAddRecord_FMA;
         private Button buttonSearch_FMA;
         private Button buttonReset_FMA;
 
+        // Поля ввода данных
         private TextBox textBoxCode_FMA;
         private TextBox textBoxDuration_FMA;
         private TextBox textBoxTheme_FMA;
@@ -31,16 +36,20 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9
         private TextBox textBoxActorRole_FMA;
         private TextBox textBoxSearchActor_FMA;
 
+        // Список сортировки
         private ComboBox comboBoxSort_FMA;
 
+        // Выбор даты
         private DateTimePicker dateTimePickerRecordDate_FMA;
 
+        // Метки статистики
         private Label labelCount_FMA;
         private Label labelSum_FMA;
         private Label labelAvg_FMA;
         private Label labelMin_FMA;
         private Label labelMax_FMA;
 
+        // Метки для полей ввода
         private Label labelCode_FMA;
         private Label labelDate_FMA;
         private Label labelDuration_FMA;
@@ -49,11 +58,14 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9
         private Label labelActorName_FMA;
         private Label labelActorRole_FMA;
 
+        // Метки справки
         private Label labelHelpTitle_FMA;
         private Label labelHelpText_FMA;
 
+        // Инициализация компонентов формы
         private void InitializeComponent()
         {
+            // Основные параметры формы
             Text = "Каталог видеоклипов";
             Width = 1200;
             Height = 760;
@@ -64,9 +76,9 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9
             dataGridViewVideoCatalog_FMA = new DataGridView
             {
                 Dock = DockStyle.Fill,
-                AllowUserToAddRows = false,
-                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+                AllowUserToAddRows = false,               // Запрет на добавление строк вручную
+                SelectionMode = DataGridViewSelectionMode.FullRowSelect, // Выбор всей строки
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill, // Автоматическая ширина колонок
                 BackgroundColor = Color.White
             };
             dataGridViewVideoCatalog_FMA.CellClick += dataGridViewVideoCatalog_FMA_CellClick;
@@ -75,30 +87,39 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9
             // ===== Ввод данных =====
             panelInput_FMA = new Panel { Dock = DockStyle.Top, Height = 90, BackColor = Color.White };
 
+            // Метка и текстбокс для "Код"
             labelCode_FMA = new Label { Text = "Код", Left = 10, Top = 7, Width = 40 };
             textBoxCode_FMA = new TextBox { Left = 10, Top = 30, Width = 70 };
 
+            // Метка и DateTimePicker для "Дата"
             labelDate_FMA = new Label { Text = "Дата", Left = 90, Top = 7, Width = 40 };
             dateTimePickerRecordDate_FMA = new DateTimePicker { Left = 90, Top = 30, Width = 120 };
 
+            // Метка и текстбокс для "Длительность"
             labelDuration_FMA = new Label { Text = "Длительность", Left = 220, Top = 7, Width = 85 };
             textBoxDuration_FMA = new TextBox { Left = 220, Top = 30, Width = 80 };
 
+            // Метка и текстбокс для "Тема"
             labelTheme_FMA = new Label { Text = "Тема", Left = 310, Top = 7, Width = 40 };
             textBoxTheme_FMA = new TextBox { Left = 310, Top = 30, Width = 120 };
 
+            // Метка и текстбокс для "Стоимость"
             labelCost_FMA = new Label { Text = "Стоимость", Left = 440, Top = 7, Width = 70 };
             textBoxCost_FMA = new TextBox { Left = 440, Top = 30, Width = 90 };
 
+            // Метка и текстбокс для "Актёр"
             labelActorName_FMA = new Label { Text = "Актёр (ФИО)", Left = 540, Top = 7, Width = 100 };
             textBoxActorName_FMA = new TextBox { Left = 540, Top = 30, Width = 140 };
 
+            // Метка и текстбокс для "Амплуа"
             labelActorRole_FMA = new Label { Text = "Амплуа", Left = 690, Top = 7, Width = 70 };
             textBoxActorRole_FMA = new TextBox { Left = 690, Top = 30, Width = 120 };
 
+            // Кнопка добавления записи
             buttonAddRecord_FMA = new Button { Text = "Добавить", Left = 840, Top = 31, Width = 100 };
             buttonAddRecord_FMA.Click += buttonAddRecord_FMA_Click;
 
+            // Добавление всех контролов на панель ввода
             panelInput_FMA.Controls.AddRange(new Control[]
             {
                 labelCode_FMA, textBoxCode_FMA,
@@ -128,6 +149,7 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9
             });
             comboBoxSort_FMA.SelectedIndex = 0;
 
+            // Подписка на события кнопок и ComboBox
             buttonLoadCsv_FMA.Click += buttonLoadCsv_FMA_Click;
             buttonSaveCsv_FMA.Click += buttonSaveCsv_FMA_Click;
             buttonSearch_FMA.Click += buttonSearch_FMA_Click;
@@ -158,8 +180,23 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9
             panelChart_FMA.Paint += panelChart_FMA_Paint;
 
             // ===== Справка =====
-            panelHelp_FMA = new Panel { Width = 320, Height = 180, BackColor = Color.LightYellow, BorderStyle = BorderStyle.FixedSingle, Anchor = AnchorStyles.Bottom | AnchorStyles.Right };
-            labelHelpTitle_FMA = new Label { Text = "🛈 Справка", Font = new Font("Segoe UI", 10F, FontStyle.Bold), ForeColor = Color.DarkBlue, Left = 10, Top = 8, AutoSize = true };
+            panelHelp_FMA = new Panel
+            {
+                Width = 320,
+                Height = 180,
+                BackColor = Color.LightYellow,
+                BorderStyle = BorderStyle.FixedSingle,
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Right
+            };
+            labelHelpTitle_FMA = new Label
+            {
+                Text = "🛈 Справка",
+                Font = new Font("Segoe UI", 10F, FontStyle.Bold),
+                ForeColor = Color.DarkBlue,
+                Left = 10,
+                Top = 8,
+                AutoSize = true
+            };
             labelHelpText_FMA = new Label
             {
                 Left = 10,
@@ -173,6 +210,8 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9
             panelHelp_FMA.Controls.Add(labelHelpTitle_FMA);
             panelHelp_FMA.Controls.Add(labelHelpText_FMA);
             panelChart_FMA.Controls.Add(panelHelp_FMA);
+
+            // Обновление позиции справки при изменении размера панели диаграммы
             panelChart_FMA.Resize += (s, e) =>
             {
                 panelHelp_FMA.Left = panelChart_FMA.Width - panelHelp_FMA.Width - 15;

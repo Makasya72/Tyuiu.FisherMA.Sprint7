@@ -8,31 +8,33 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9.Lib
 {
     public class DataService
     {
+        // ===== Загрузка CSV =====
         public DataTable LoadFromCsv(string path)
         {
             DataTable table = CreateTable_FMA();
             if (!File.Exists(path)) return table;
 
-            foreach (string line in File.ReadAllLines(path).Skip(1))
+            foreach (string line in File.ReadAllLines(path).Skip(1)) // Пропуск заголовка
             {
                 string[] values = line.Split(';');
                 table.Rows.Add(
-                    values[0],
-                    DateTime.Parse(values[1]),
-                    int.Parse(values[2]),
-                    values[3],
-                    double.Parse(values[4], CultureInfo.InvariantCulture),
-                    values[5],
-                    values[6]
+                    values[0],                                // Code
+                    DateTime.Parse(values[1]),               // Date
+                    int.Parse(values[2]),                     // Duration
+                    values[3],                                // Theme
+                    double.Parse(values[4], CultureInfo.InvariantCulture), // Cost
+                    values[5],                                // Actor
+                    values[6]                                 // Role
                 );
             }
             return table;
         }
 
+        // ===== Сохранение CSV =====
         public void SaveToCsv(DataTable table, string path)
         {
             using StreamWriter sw = new StreamWriter(path);
-            sw.WriteLine("Code;Date;Duration;Theme;Cost;Actor;Role");
+            sw.WriteLine("Code;Date;Duration;Theme;Cost;Actor;Role"); // Заголовок CSV
 
             foreach (DataRow row in table.Rows)
             {
@@ -40,10 +42,7 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9.Lib
             }
         }
 
-
-
-
-
+        // ===== Создание структуры таблицы =====
         private DataTable CreateTable_FMA()
         {
             DataTable dt = new DataTable();
@@ -57,6 +56,7 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9.Lib
             return dt;
         }
 
+        // ===== Методы статистики =====
         public double SumCost(DataTable table) => table.AsEnumerable().Sum(r => r.Field<double>("Cost"));
         public double AverageCost(DataTable table) => table.AsEnumerable().Average(r => r.Field<double>("Cost"));
         public double MinCost(DataTable table) => table.AsEnumerable().Min(r => r.Field<double>("Cost"));
