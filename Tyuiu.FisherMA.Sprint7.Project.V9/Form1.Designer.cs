@@ -20,6 +20,9 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9
         // Таблица для отображения видеокаталога
         private DataGridView dataGridViewVideoCatalog_FMA;
 
+
+
+
         // Кнопки управления
         private Button buttonLoadCsv_FMA;
         private Button buttonSaveCsv_FMA;
@@ -148,6 +151,18 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9
                 "Дата ↑", "Дата ↓"
             });
             comboBoxSort_FMA.SelectedIndex = 0;
+
+
+
+            textBoxDuration_FMA.KeyPress += OnlyDigits_KeyPress;
+            textBoxCost_FMA.KeyPress += OnlyDigitsAndComma_KeyPress;
+
+            textBoxActorName_FMA.KeyPress += OnlyLettersAndSpace_KeyPress;
+            textBoxActorRole_FMA.KeyPress += OnlyLettersAndSpace_KeyPress;
+            textBoxTheme_FMA.KeyPress += OnlyLettersAndSpace_KeyPress;
+
+
+
 
             // Подписка на события кнопок и ComboBox
             buttonLoadCsv_FMA.Click += buttonLoadCsv_FMA_Click;

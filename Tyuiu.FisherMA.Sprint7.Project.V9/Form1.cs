@@ -35,6 +35,46 @@ namespace Tyuiu.FisherMA.Sprint7.Project.V9
             MessageBox.Show("Сохранено");
         }
 
+
+
+        // ===== Только цифры =====
+        private void OnlyDigits_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+                e.Handled = true;
+        }
+
+        // ===== Цифры + запятая (для стоимости) =====
+        private void OnlyDigitsAndComma_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+
+            if (!char.IsDigit(e.KeyChar) &&
+                !char.IsControl(e.KeyChar) &&
+                e.KeyChar != ',')
+            {
+                e.Handled = true;
+            }
+
+            // запрет второй запятой
+            if (e.KeyChar == ',' && tb.Text.Contains(","))
+                e.Handled = true;
+        }
+
+        // ===== Только буквы и пробелы (ФИО, тема, амплуа) =====
+        private void OnlyLettersAndSpace_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) &&
+                !char.IsControl(e.KeyChar) &&
+                e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
+        }
+
+
+
+
         // ===== Добавление/Редактирование записи =====
         private void buttonAddRecord_FMA_Click(object sender, EventArgs e)
         {
